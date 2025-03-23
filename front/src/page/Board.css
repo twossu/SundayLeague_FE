@@ -26,3 +26,25 @@
   color: white;
   border-radius: 5px;
 }
+
+.Button button {
+  cursor: pointer;
+  width: 60px;
+  border: none;
+  background-color: rgb(184, 223, 196);
+  color: white;
+  border-radius: 5px;
+  flex: 1;
+  padding: 7px;
+}
+
+.Button2 button {
+  cursor: pointer;
+  width: 80px;
+  border: none;
+  background-color: rgb(184, 223, 196);
+  color: white;
+  border-radius: 5px;
+  flex: 1;
+  padding: 7px;
+}
