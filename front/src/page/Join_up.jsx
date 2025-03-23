@@ -165,17 +165,10 @@ export default function Join_up() {
           disabled={notAllow}
           className="bottomButton"
         >
-          로그인
+          회원가입
         </button>
       </div>
       <hr nonshade />
-      <div className="registerWrap">
-        <div className="registerTitle">
-          <Link to="/register1">아이디 찾기 | </Link>
-          <Link to="/register2">비밀번호 찾기 | </Link>
-          <Link to="/Join_up">회원가입</Link>
-        </div>
-      </div>
     </div>
   );
 }
