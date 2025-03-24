@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import "./Join_up.css";
 const User = {
-  email: "abc@naver.com",
+  id: "abc",
   pw: "System2000!!",
+  email: "abc@naver.com",
+  name: "이수",
+  number: "010-1234-5678",
 };
 
 export default function Join_up() {
-  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [pwcheck, setPwcheck] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
 
-  const [emailValid, setEmailValid] = useState(false);
+  const [idValid, setIdValid] = useState(false);
   const [pwValid, setPwValid] = useState(false);
+  const [pwcheckValid, setPwcheckValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
+  const handleId = (e) => {
+    setId(e.target.value);
     const regex =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(email)) {
-      setEmailValid(true);
+    if (regex.test(id)) {
+      setIdValid(true);
     } else {
-      setEmailValid(false);
+      setIdValid(false);
     }
   };
 
@@ -36,21 +44,57 @@ export default function Join_up() {
     }
   };
 
-  const onClickConfirmButton = () => {
-    if (email === User.email && pw === User.pw) {
-      alert("로그인에 성공했습니다.");
+  const handlePwcheck = (e) => {
+    setPwcheck(e.target.value);
+    const regex =
+      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    if (regex.test(pwcheck)) {
+      setPwcheckValid(true);
     } else {
-      alert("등록되지 않은 회원이거나 입력한 값이 일치하지 않습니다.");
+      setPwcheckValid(false);
+    }
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    const regex =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    if (regex.test(id)) {
+      setIdValid(true);
+    } else {
+      setIdValid(false);
+    }
+  };
+
+  const handleName = (e) => {
+    setName(e.target.value);
+    const regex =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    if (regex.test(id)) {
+      setIdValid(true);
+    } else {
+      setIdValid(false);
+    }
+  };
+
+  const handleNumber = (e) => {
+    setNumber(e.target.value);
+    const regex =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    if (regex.test(id)) {
+      setIdValid(true);
+    } else {
+      setIdValid(false);
     }
   };
 
   useEffect(() => {
-    if (emailValid && pwValid) {
+    if (idValid && pwValid) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
-  }, [emailValid, pwValid]);
+  }, [idValid, pwValid]);
 
   return (
     <div className="page">
@@ -58,6 +102,7 @@ export default function Join_up() {
         <br />
         회원가입
       </div>
+
       <div className="contentWrap">
         <div className="inputTitle">아이디</div>
         <div className="inputWrap">
@@ -65,14 +110,13 @@ export default function Join_up() {
             type="text"
             className="input"
             placeholder="아이디 또는 전화번호"
-            value={email}
-            onChange={handleEmail}
+            value={id}
+            onChange={handleId}
           />
         </div>
-
         <div className="errorMessageWrap">
-          {!emailValid && email.length > 0 && (
-            <div>올바른 이메일을 입력해주세요.</div>
+          {!idValid && id.length > 0 && (
+            <div>올바른 아이디를 입력해주세요.</div>
           )}
         </div>
 
@@ -88,22 +132,22 @@ export default function Join_up() {
             onChange={handlePw}
           />
         </div>
-
         <div className="errorMessageWrap">
           {!pwValid && pw.length > 0 && (
             <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
           )}
         </div>
+
         <div style={{ marginTop: "26px" }} className="inputTitle">
           비밀번호 확인
         </div>
         <div className="inputWrap">
           <input
-            type="password"
+            type="passwordcheck"
             className="input"
             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
-            value={pw}
-            onChange={handlePw}
+            value={pwcheck}
+            onChange={handlePwcheck}
           />
         </div>
         <div className="errorMessageWrap">
@@ -115,15 +159,17 @@ export default function Join_up() {
         </div>
         <div className="inputWrap">
           <input
-            type="password"
+            type="text"
             className="input"
-            placeholder="@gmail.com"
-            value={pw}
-            onChange={handlePw}
+            placeholder="아이디 또는 전화번호"
+            value={email}
+            onChange={handleEmail}
           />
         </div>
         <div className="errorMessageWrap">
-          {!pwValid && pw.length > 0 && <div>정확히 입력해주세요.</div>}
+          {!idValid && id.length > 0 && (
+            <div>올바른 이메일을 입력해주세요.</div>
+          )}
         </div>
 
         <div style={{ marginTop: "26px" }} className="inputTitle">
@@ -134,8 +180,8 @@ export default function Join_up() {
             type="password"
             className="input"
             placeholder=""
-            value={pw}
-            onChange={handlePw}
+            value={name}
+            onChange={handleName}
           />
         </div>
         <div className="errorMessageWrap">
@@ -150,8 +196,8 @@ export default function Join_up() {
             type="password"
             className="input"
             placeholder="-포함하여 입력하세요"
-            value={pw}
-            onChange={handlePw}
+            value={number}
+            onChange={handleNumber}
           />
         </div>
         <div className="errorMessageWrap">
@@ -160,11 +206,7 @@ export default function Join_up() {
       </div>
 
       <div className="buttonWrap">
-        <button
-          onClick={onClickConfirmButton}
-          disabled={notAllow}
-          className="bottomButton"
-        >
+        <button disabled={notAllow} className="bottomButton">
           회원가입
         </button>
       </div>
